@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Object  chapter 2</title>
+	<script type="text/javascript">
+		function inherit(x){
+			if(x===null) throw new TypeError();
+			if(Object.create) return Object.create(x);
+			var t=typeof x;
+			if(t!=='object'&& t!=='function') throw new TypeError();
+
+			function f(){};
+			f.prototype=x;
+
+			return new f();
+		}
+
+
+		Object.defineProperty(Object.prototype, 'extend', {
+
+			wirtable:true,
+			enumerable:false,
+			configurable:true,
+
+			value:function(o){
+				  var names=Object.getOwnPropertyNames(o);
+
+				  for(var i=0; i<names.length; i++){
+
+					  if(names[i] in this) continue;
+
+					  var desc =Object.getOwnPropertyDescriptor(o, names[i]);
+
+					  Object.defineProperty(this, names[i], desc);
+				  }
+			}
+		})
+
+
+		var p={ x:2 }
+		var o=Object.create(p);
+		var nu=null;
+
+		console.log(p.isPrototypeOf(o));
+		console.log(Object.prototype.isPrototypeOf(p));
+
+		console.log(Object.prototype.toString.call(Object.prototype))
+
+		function type(x){
+			if(x===null) return 'Null';
+			if(x===undefined) return 'undefined';
+
+			return Object.prototype.toString.call(x).slice(8, -1);
+		}
+		console.log(Object.isExtensible(p));
+		console.log(type('123'))
+
+		var opp={ x:1, y:{z:[false, null ,'']}};
+
+		var s=JSON.stringify(opp);
+
+		console.log(s)
+
+		var mp=JSON.parse(s);
+
+		console.log(mp)
+		console.log(Object.getOwnPropertyDescriptor(mp))
+		console.log(Object.getPrototypeOf(s))
+		console.info(mp.isPrototypeOf(s))
+
+		var now= new Date();
+		var year=now.getFullYear();
+
+		function newY(){ console.log(123) }
+		// console.log(typeof JSON.parse(newY))
+
+		// console.log(mp.toJson())
+		// console.log(Date.toJSON())
+	</script>
+
+</head>
+<body>
+
+</body>
+</html>

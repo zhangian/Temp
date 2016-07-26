@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript constructor chapter</title>
+	<script type="text/javascript">
+		var F=function(f){ return f; }
+		console.log(F)
+
+		var p=F.prototype;
+		var c=p.constructor;
+
+		console.log(F==c);
+		console.log(c);
+
+		function Range(from, to){
+			this.from=from;
+			this.to=to;
+		}
+
+		Range.prototype={
+			constructor:Range,
+			includes:function(x){ return this.from <= x && x<=this.to; },
+			foreach:function(f){ for(var x=Math.ceil(this.from); x<=this.to; x++) f(x); },
+			toString:function(){ return '('+this.from+ '...' +this.to+')'}
+		}
+
+		var a=new Range(1,4);
+		var b=a;
+		console.log(a==b)
+
+		Range.prototype.includes=function(x){ return this.from<=x && x<=this.to};
+		Range.prototype.foreach=function(f){ for(var x=Math.ceil(this.form); x<this.to; x++) f(x)};
+		Range.prototype.toString=function(){ return '('+ this.from + '...' + this.to +')'}
+
+		function defineClass(custructor, methods, statics){
+
+			if(methods) extend(constructor.prototype, methods);
+			if(statics) extend(constructor.prototype, statics);
+			return constructor;
+
+		};
+
+		var SimpleRange=defineClass(
+			function(f, t){ this,f=f; this.t=t; },
+			{
+				includes:function(x){ return this.f<=x&&x<this.t},
+				toString:function(){ return this.f +'...'+ this.t;}
+			},
+			{upto:function(t){ return new SimpleRange(o, t);}});
+
+			function Complex(real, imaginary){
+				if(isNaN(real) || isNaN(imaginary)) throw new TypeError();
+				this.r=real;
+				this.i=imaginary;
+			};
+
+			Complex.prototype.mul=function(that){
+				return new Complex(this.r*that.r-this.i*that.i, this.r*that.i+this.i*that.r);
+			}
+//计算复数的模，复数的模定义为
+			Complex.prototype.mag=function(){
+				return Math.sqrt(this.r*this.r+this.i*this.i);
+			}
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

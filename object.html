@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript Object chapter</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="email=no" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<script>
+
+		(function(doc, win){
+
+		var docEle=doc.documentElement;
+		resizeEvt='orientationchange' in window ? 'orienttationchange' : 'resize';
+		recalc=function(){
+
+			var clientWidth=docEle.clientWidth;
+			if(!clientWidth) return;
+			docEle.style.fontSize= 100 * (clientWidth / 320) +'px'
+
+		};
+
+		if(!doc.addEventListener) return;
+
+		win.addEventListener( resizeEvt, recalc , false);
+
+		doc.addEventListener( 'DOMContentLoaded', recalc, false);
+
+	})(document, window)
+	</script>
+
+
+
+	<script type="text/javascript">
+	'use strict';
+		var empty={};
+
+		var pointer={ x:0, y:0 }
+		var pointer2= { x:pointer.x, y:pointer.y }
+
+		var book={
+			"main title":"javascript",
+
+			'sub-title':'the definitive Guide',
+
+			"for":"all audiences",
+
+			author:{
+
+				firstName:"David",
+				surname:"flanagan"
+			}
+		}
+
+		console.log(book)
+
+		var a=new Object();
+
+		var n=Object();
+
+		console.log(n)
+
+		var a =new Array(), d=new Date(), r=new RegExp();
+
+		var o1=Object.create({x:1, y:2});
+
+		var o2=Object.create(Object.prototype);
+
+		var o3=Object.create(null);
+
+		function inherit(obj){
+
+			if(obj==null) throw new Error('传入值为null');
+
+			if(Object.create) return Object.create(obj);
+
+			var t=typeof obj;
+			if(t!=="object" && t !=='function') throw new Error();
+
+			function f(){};
+			f.prototype=obj;
+			return new f();
+
+		}
+		var p=[]
+	 	console.log(inherit(p));
+
+		var addr='';
+		var customer={ address0:'1234', address1:'1234', address2:'1234', address3:'1234' }
+
+		for(var i=0; i<4; i++){
+
+			addr += customer["address" +i]+ '\n';
+
+		}
+
+		console.log(addr)
+
+		function addStock(portfolio, stockname, shares){
+
+			portfolio[stockname]=shares;
+
+		}
+
+		function getValue(portfolio){
+
+			var total=0.0;
+
+			for(var stockName in portfolio){
+
+				var shares=	portfolio[stockName];
+
+				total+=shares;
+
+			}
+
+			return total;
+
+		}
+
+
+		var o={ x:1 , z:2, i:4, g:5}
+
+		console.log("x" in o);
+
+		console.log('\n')
+
+		console.dir( "y" in o )
+
+		console.error('toString' in o )
+
+		console.log('%c this is new line in console ', 'font-size:18px; color:#fff; background:#ff8888'  )
+		console.log('\n')
+
+		console.log(o.hasOwnProperty('x'))
+
+		console.log(o.hasOwnProperty('y'))
+
+		console.log(o.hasOwnProperty('toString'))
+
+		console.log(Object.keys(o))
+
+
+		console.info(o.propertyIsEnumerable('toString'))
+
+		for (var p in o) console.log(p)
+		var arr=[]
+		for( p in o ) {
+
+			if(!o.hasOwnProperty(p)) continue;
+			arr.push(p)
+		}
+
+		function inherit(x){
+			if(p==null) throw new  TypeError('不能为null');
+			if(Object.create) return Object.create(p);
+			var t=typeof p;
+
+			if(t !=='object' && t !== 'function') throw new TypeError('类型错误');
+
+			function f(){};
+
+			f.prototype=p;
+
+			return new f();
+		}
+		console.log(arr)
+
+		function extend(o ,p){
+			for( var prop in p ){
+				o[prorp] = p[prop]
+			}
+			return o;
+		}
+
+		function merge(o, p){
+
+			for (var prop in p){
+
+				if(o.hasOwnProperty[prop]) continue;
+				o[prop] = p[prop];
+
+			}
+			return o;
+		}
+
+		function restrict(o, p){
+			for (var prop in o) {
+
+				if(!(prorp in p)) delete o[prop]
+			}
+			return o;
+		}
+
+		function subtract(o, p){
+
+			for( var prop in p){
+				delete o[prop];
+			}
+			return o;
+		}
+
+		function union(o, p){ return extend(extend({}, o), p);}
+
+		function intersection(o, p){ return restrict(extend({}, o), p); }
+
+		function keys(o){
+
+			if(typeof o !== 'object') throw new TypeError();
+
+			var result=[];
+
+			for(var prop in o){
+
+				if(o.hasOwnProperty(prop)){
+
+					result.push(prop)
+
+				}
+			}
+
+			return result;
+		}
+
+		console.info(keys(o))
+		console.dir(keys(o))
+
+		console.error(Object.getOwnPropertyNames(o));
+
+		var x={
+
+			data_prop:'value',
+
+			get accessor_prop(){},
+
+			set accessor_prop(value){}
+		};
+
+
+		var p={
+
+			x:1.0,
+			y:1.0,
+
+			get r(){ return Math.sqrt(this.x * this.x + this.y *this.y)},
+
+			set r(newValue){
+
+				var oldValue= Math.sqrt(this.x * this.x + this.y * this.y );
+				var ratio=newValue/oldValue;
+
+				this.x*=ratio;
+				this.y*=ratio;
+			},
+
+			get theta(){ return Math.atan2(this.y, this.x)}
+		}
+
+		console.log(p.r)
+		console.log(p.theta)
+
+		var q=inherit(p);
+
+		q.x=10, q.y=10;
+
+		console.log(q);
+
+		console.log(q.r)
+
+
+		var m={};
+
+		Object.defineProperty(m, 'x' ,{
+
+			value:2,
+			writable:false,
+			enumerable:false,
+			configurable:true
+		})
+
+		console.log(Object.getOwnPropertyDescriptor(m, 'x'))
+
+		console.log(o.x);
+
+		console.log(Object.keys(m))
+		Object.defineProperty(m, 'x', { writable:false});
+
+		console.table(Object.getOwnPropertyDescriptor(m, 'x'));
+
+		// m.x=2;
+		Object.defineProperty(m, 'x', { value:3 })
+
+		console.log(m.x)
+
+		var oP=Object.defineProperties({}, {
+
+			x:{ value:3, writable:true, enumerable:true, configurable:true },
+			y:{ value:2, writable:true, enumerable:true, configurable:true },
+			r:{
+				get:function(){ return Math.sqrt(this.x*this.x + this.y*this.y) }
+			}
+		})
+
+		console.log(oP)
+		// console.log('%c', 'background:url("https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png") no-repeat -135px -1px; width:300px; height:400px;');
+		//
+		// console.log('%c    ', 'font-size:12px; padding:50px 300px; line-height:120px; background:url(http://www.yi-jy.com/images/console_pic.jpg) no-repeat;');
+
+		// console.log("%c    ","padding:120px 120px; line-height:340px; background:url('g.jpg') no-repeat;")
+
+		// console.log("%c", "padding:50px 300px;line-height:120px;background:url('http://wayouliu.duapp.com/img/tagsImg/youth.gif') no-repeat;");
+	</script>
+	<style>
+		/*body{ background:url(g.jpg)}*/
+		body{ font-size:0.14rem;}
+	</style>
+</head>
+<body>
+12345
+
+</body>
+</html>

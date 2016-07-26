@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript regExp chapter</title>
+	<script type="text/javascript">
+		'use strict';
+		var str='Vist w3cschool! w3cschool';
+
+		var n=str.search('w3cschool');
+		console.log(n);
+
+		var res=str.replace(/w3cschool/m, 'microsoft');
+
+		console.log(res);
+
+		var date='2016-06-06 17:37:58', regStr=date.replace(/[-]/g, '.');
+
+		console.log(regStr)
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

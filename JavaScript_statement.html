@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript chapter statement</title>
+	<script type="text/javascript">
+	// 'use strict';
+		var name="zmr";
+		var greeting= "hello "+ name;
+		console.log(greeting);
+
+		var i=3;
+		console.log(i*=3);
+
+		console.log(i++);
+		console.log(i);
+		console.log(++i);
+
+		// delete name; 无法删除全局变量
+
+		var o={
+			x:2,
+			y:3
+		}
+
+		console.log(delete o.x);
+
+		console.log(o.x);
+
+		{
+			var x=Math.PI*10;
+			var cx=Math.cos(x);
+			console.log(cx);
+		}
+
+		console.log(x);
+
+		var a=new Array(2, 3, 4, 5, 6, 7);
+
+		for(var i=0; i<a.length; a[i++]=0) /*  empty  */ ;
+
+		console.log(a);
+
+		var m;
+		console.log(m);
+
+		var j=0;
+		var p, q;
+		var greeting ="hello" +name;
+		var x=2.34, y=Math.cos(0.75), r, theta;
+
+		var x=2, y=x*x;
+
+
+		var x=2,
+			f=function(x){ return x*x },
+			y=f(x);
+
+			console.log(y);
+
+			for( var i=0; i<10; i++) console.log(i);
+
+			for( var i=0, j=10; i<10; i++, j--) console.log(i*j);
+
+			console.log(i);
+
+			var f=function(x) { return x+1 }
+
+			function fn(x){ return x+1 }
+			console.log(newf)
+			var newf=function(x){ return x+2 }
+
+			console.log(newf)
+
+			delete fn;
+
+			newf=123;
+			console.log(newf);
+			console.log(fn);
+
+			fn=345;
+			console.log(fn)
+	</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript function chapter test</title>
+
+	<script type="text/javascript">
+		// 'use strict';
+
+		var scope='global scope';
+		function checkscope(){
+
+			var scope='local scope';
+
+			function f(){ return scope ;}
+			return f();
+		}
+
+		console.log(checkscope())
+		document.write(checkscope());
+
+
+		var newScope='global new scope';
+		function checkoutScope(){
+
+			var scope='local new scope';
+
+			function f(){ return scope; }
+			return f;
+		}
+
+		console.log(checkoutScope()())
+
+
+		function check(args){
+
+			var actual=args.length;
+			var expected=args.callee.length;
+
+			if(actual!==expected){ throw Error('Expected '+ expected +'args; got'+actual) }
+
+		}
+
+		function fz(x, y, z){ check(arguments); return x+y+z;}
+
+		// console.log(fz(1, 2, 4))
+
+		console.log(check.callee)
+
+
+		var uniqueInteger=(function(){
+			var counter=0;
+			return function(){ return counter++; }
+		}());
+
+
+		function setCount(){
+			var iNow=0, timer;
+
+				timer=setInterval(function(){
+					if(iNow<10) {
+					console.log(iNow++)
+				}else{
+					clearInterval(timer)
+				}
+				},1000)
+
+		}
+
+		// setCount();
+
+		function counter(){
+			var n=0;
+			return {
+				count:function(){ return n++ ; },
+				reset:function(){ n=0; }
+			}
+		}
+
+		var c=counter(), d=counter();
+
+		console.log(c.count())
+		console.log(d.count())
+		console.log(c.count())
+
+
+		function countern(n){
+			return {
+				get count(){ return n++ ;},
+
+				set count(m){
+					if(m>=n) n=m;
+					else throw Error('count can only be set to a larger value')
+				}
+			}
+		}
+
+		var m=countern(1000);
+		console.log(m.count)
+		console.log(m.count)
+
+		m.count=2000;
+
+		console.log(m.count)
+
+		// m.count=2000;
+
+
+		function addPrivateProperty(o, name, predicate){
+
+			var value;
+			o['get'+name]=function(){ return value; };
+
+			o['set'+name]=function(v){
+				if(predicate && predicate(v)){
+					throw Error('set'+ name +' : invalid value '+ v);
+				}else {
+					value=v;
+				}
+			};
+		}
+
+		var n={};
+
+		addPrivateProperty(n, 'Name', function(x){ return typeof x == 'string';});
+
+		// n.setName('Frank');
+
+		console.log(n.getName())
+		n.setName(0)
+		console.log(n.getName())
+
+
+		function constfunc(v){
+			return function(){ return v; }
+		}
+
+		var fncs=[];
+
+		for(var i=0; i<10; i++) {
+			fncs[i] = constfunc(i);
+			console.log(fncs[i]())
+		}
+
+		console.log(fncs[6]());
+
+
+		function checkArgs(args){
+			var actual=args.length;
+			var expected=args.callee.length;
+
+			if(actual!==expected)
+				throw Error('Expected '+ expected +'args ; got '+actual);
+		}
+
+		function f(x, y, z){
+			console.log(this)
+			return x+y+z;
+		}
+
+		var o={x:3, y:4, z:9};
+
+		console.log(f(1,2,4))
+		console.log(f.call(o, o.x, o.y, o.z));
+
+		f.apply(o.y)
+
+		function trace(i, j){
+			// debugger;
+			var original=i[j];
+			i[j]=function(){
+				console.log(new Date(), 'Entering:', j);
+
+				var result=original.apply(this, arguments);
+				console.log(new Date(), 'Extering :', j);
+
+				return result;
+			}
+		}
+
+		var biggest=Math.max.apply(Math, [1,2,3,4]);
+
+		console.log(biggest)
+
+		console.log(trace(o, m))
+
+		function f(y){ return this.x+y; }
+
+		var k={x:1};
+		var g=f.bind(k);
+
+		console.log(g(2))
+	</script>
+	<style type="text/css">
+		ul>li{ list-style-image:url(g.jpg)}
+		ul>li:nth-child(3){
+			list-style-type:armenian;
+			list-style-image:url(nav_logo242.png) !important;
+		}
+	</style>
+</head>
+<body>
+<ul>
+	<li class="ul-li--one"></li>
+	<li class="ul-li--2"></li>
+	<li class="ul-li--one"></li>
+	<li class="ul-li--one"></li>
+	<li class="ul-li--one"></li>
+	<li class="ul-li--one"></li>
+	<li class="ul-li--one"></li>
+	<li class="ul-li--one"></li>
+</ul>
+</body>
+</html>

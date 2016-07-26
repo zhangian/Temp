@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript</title>
+	<script type="text/javascript">
+		// alert(n)  //undefined
+		var n=9;
+		function fn(){
+			// alert(n);
+			n=7;
+			var n=6;
+		}
+
+		fn();  //undefined
+
+		// alert(n) //7
+
+		var i, j, sum=0;
+
+		for(i=0, j=10; i<10; i++, j--){
+			sum += i*j;
+			console.log(sum)
+		}
+		console.log(sum);
+		var m=k=4;
+		function newStr(){
+
+			var m=k=4;
+
+		}
+
+
+		console.log(k)
+
+		function display_object(o){
+			if(!o) return;
+			else console.warn('hello')
+		}
+
+		function factorial(x){
+			// if(x<0) throw new Error("参数不能为负数");
+
+			for(var f=1; x>1; f*=x, x--) /* empty statement */;
+			return f;
+
+		}
+
+		factorial(-2);
+
+		var obj={ x:1 }
+		obj.y;
+		// obj.y.z=2;
+
+		console.log(obj)
+		var yz;
+		if(obj.y){
+			yz=obj.y.z;
+		}
+
+		var person= { age:20, title:'fe'}
+
+		var descriptor=Object.getOwnPropertyDescriptor(Object, 'prototype')
+
+		console.warn(descriptor.configurable);
+	</script>
+</head>
+<body>
+
+</body>
+</html>
