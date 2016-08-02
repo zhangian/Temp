@@ -3,6 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<script type="text/javascript">
+		function inherit(p){
+			if(p===null) throw TypeError();
+			if(Object.create) return Object.create(p);
+			var t=typeof p;
+			if(t !=='object' && t!=='function') throw TypeError();
+
+			function f(){}
+			f.prototype=p;
+			return new f();
+		};
+
+
+		function Card(suit, rank){
+			this.suit=suit;
+			this.rank=rank;
+		};
+
+	</script>
 	<style>
 		body{ color:#ff6666; }
 	</style>
