@@ -44,14 +44,48 @@
             return 0;
         }
 
-        Card.orderByRank=function(a, b){ return a.compareTo(b); }
+        Card.orderByRank=function(a, b){ return a.compareTo(b); };
 
-        Card.
+        Card.orderBySuit=function(a, b){ 
+            if(a.suit < b.suit) return -1;
+            if(a.suit > b.suit) return 1;
+            if(a.rank < b.rank) return -1;
+            if(a.rank > b.rank) return 1;
+        };
+
+        //defined 用以表示一副标准 standard 扑克牌的类 class
+        function Deck(){
+            var cards=this.cards=[];
+            Card.Suit.foreach(function(s){
+                Card.Rank.foreach(function(r){
+                    cards.push(new Card(s, r));
+                });
+            });
+        };
+
+        Deck.prototype.shuffle=function(){
+            var deck=this.cards, len=deck.length;
+            for(var i=len-1; i>0; i--){
+                var r=Math.floor(Math.random()*(i+1)), temp;
+                temp=deck[i], deck[i]=deck[r], deck[r]=temp;
+            }
+            return this;
+        };
+
+        Deck.prototype.deal=function(n){
+            if(this.cards.length<n) throw 'Out of cards';
+            return this.cards.splice(this.cards.length -n , n);
+        }
+
+        var deck=(new Deck()).shuffle();
+        var hand=deck.deal(13).sort(Card.orderBySuit);
+        console.log(deck)
         console.log(23)
     </script>
 </head>
-<body>
+<body style="background:url("  g.jpg")">
     
+this is test
 
 </body>
 </html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript pattern chapter</title>
+	<script type="text/javascript">
+		'use strict';
+		var strVule='cons test news';
+		var pattern=/s$/;
+		var patternNew=new RegExp('s$');
+
+		console.log(strVule.match(pattern));
+		function getRE(){
+			var re=/[a-z]/;
+			re.foo='bar';
+			return re;
+		}
+
+		var reg=getRE(), reg2=getRE();
+		console.log(reg==reg2)
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
